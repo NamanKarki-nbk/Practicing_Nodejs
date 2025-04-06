@@ -27,3 +27,12 @@ export const deleteUser = async (req:Request, res:Response): Promise<void>=>{
     await prisma.user.delete({where:{id: Number(id)}});
     res.json({message: 'User deleted'});
 };
+
+export const getUserbyId = async(req:Request, res:Response): Promise<void>=>{
+
+    const{id}= req.params;
+    const user = await prisma.user.findUnique({
+        where: {id:Number(id)}
+    });
+    res.json(user);
+}
